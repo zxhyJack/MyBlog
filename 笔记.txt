@@ -1,0 +1,266 @@
+###node.js
+	- node是一款对ES标准实现的JS引擎
+	- 通过node可以使js在服务器中运行
+	- node就是一款使用js编写的web服务器
+	- node底层是使用c++的编写的
+	- node的中js引擎使用的chrome的v8引擎
+	- node的特点：
+		1.非阻塞、异步的I/O
+		2.事件和回调函数
+		3.单线程（主线程单线程，后台I/O线程池）
+		4.跨平台
+		
+	- 模块化
+		- ES5中没有原生支持模块化，我们只能通过script标签引入js文件来实现模块化
+		- 在node中为了对模块管理，引入了CommonJS规范
+		- CommonJS的包规范允许我们将一组相关的模块组合到一起,形成一组完整的工具。
+			
+			- 模块的引用
+				- 使用 require()函数来引入一个模块
+				- 例子：
+					var 变量 = require("模块的标识");
+				
+			- 模块的定义
+				- 在node中一个js文件就是一个模块
+				- 默认情况下在js文件中编写的内容，都是运行在一个独立的函数中，
+					外部的模块无法访问
+				- 导出变量和函数
+					输出属性可以使用exports和module.exports
+					输出对象只能使用module.exports
+					- 使用 exports 
+						- 例子：
+							exports.属性 = 属性值;
+							exports.方法 = 函数;
+							
+					- 使用module.exports
+						- 例子：
+							module.exports.属性 = 属性值;
+							module.exports.方法 = 函数;
+							module.exports = {};
+			- 模块分成两大类
+				- 核心模块
+					- 由node引擎提供的模块
+					- 核心模块的标识就是，模块的名字
+				- 文件模块
+					- 由用户自己创建的模块
+					- 文件模块的标识就是文件的路径（绝对路径，相对路径）相对路径使用.或..开头
+			- 模块的标识
+				- 模块的标识就是模块的名字或路径
+					我们node通过模块的标识来寻找模块的
+					对于核心模块（npm中下载的模块），直接使用模块的名字对其进行引入
+						var fs = require("fs");
+						var express = require("express");
+						
+					对于自定义的文件模块，需要通过文件的路径来对模块进行引入
+						路径可以是绝对路径，如果是相对路径必须以./或 ../开头
+						var router = require("./router");
+
+			- 模块内代码的结构
+				在node中有一个全局对象 global，它的作用和网页中window类似
+					在全局中创建的变量都会作为global的属性保存
+					在全局中创建的函数都会作为global的方法保存
+				例子：
+					var a = 10;
+					console.log(global.a);   //undefined
+					
+					a = 12;
+					console.log(global.a);   //12
+
+				查看模块内具体代码可以通过arguments.callee.toString()
+
+				当node在执行模块中的代码时，它会首先在代码的最顶部，添加如下代码
+		 			function (exports, require, module, __filename, __dirname) {
+
+			 	在代码的最底部，添加如下代码
+		 			}
+
+			 	实际上模块中的代码都是包装在一个函数中执行的，并且在函数执行时，同时传递进了5个实参，通过console.log(arguments)查看
+					 exports
+					 	- 该对象用来将变量或函数暴露到外部
+
+					 require
+					 	- 函数，用来引入外部的模块
+
+					 module
+					 	- module代表的是当前模块本身
+					 	- exports就是module的属性
+					 	- 既可以使用 exports 导出，也可以使用module.exports导出
+
+					 __filename
+			 			C:\Users\lilichao\WebstormProjects\class0705\01.node\04.module.js
+			 			- 当前模块的完整路径
+
+				  	 __dirname
+			 			C:\Users\lilichao\WebstormProjects\class0705\01.node
+			 			- 当前模块所在文件夹的完整路径
+			
+
+	- 包（package）
+		- 将多个模块组合为一个完整的功能，就是一个包
+		- 包结构
+			bin
+				- 二进制的可执行文件，一般都是一些工具包中才有
+			lib
+				- js文件
+			doc
+				- 文档
+			test
+				- 测试代码
+			package.json
+				- 包的描述文件
+				
+		- package.json	
+			- 它是一个json格式的文件，在它里面保存了包各种相关的信息
+				name 包名
+				version 版本
+				dependencies 依赖
+				main 包的主要的文件
+				bin 可执行文件
+				
+	- npm（Node Package Manager node的包管理器）
+		- 通过npm可以对node中的包进行上传、下载、搜索等操作
+		- npm会在安装完node以后，自动安装
+		- 通过npm下载的包都放到node_modules文件夹中
+			我们通过npm下载的包，直接通过包名引入即可
+
+		- node在使用模块名字来引入模块时，它会首先在当前目录的node_modules中寻找是否含有该模块
+			如果有则直接使用，如果没有则去上一级目录的node_modules中寻找
+			如果有则直接使用，如果没有则再去上一级目录寻找，直到找到为止
+			直到找到磁盘的根目录，如果依然没有，则报错
+		- npm的常用指令
+			npm -v 查看npm的版本
+			npm version 查看所有模块的版本
+			npm init 初始化项目（创建package.json）
+			npm i/install 包名 安装指定的包
+			npm i/install 包名 --save 安装指定的包并添加依赖
+			npm i/install 包名 -g 全局安装（一般都是一些工具）
+			npm i/install 安装当前项目所依赖的包
+			npm s/search 包名 搜索包	
+			npm r/remove 包名 删除一个包
+			npm install 包名 –registry=地址  从镜像源安装包
+			npm config set registry 地址  设置镜像源
+
+####文件系统（File System）
+	- Buffer（缓冲区）
+		- Buffer的结构和数组很像，操作的方法也和数组类似
+		- 数组中不能存储二进制的文件，而buffer就是专门用来存储二进制数据
+		- 使用buffer不需要引入模块，直接使用即可
+		- 在buffer中存储的都是二进制数据，但是在显示时都是以16进制的形式显示
+			buffer中每一个元素的范围是从00 - ff   0 - 255
+		- buffer中的一个元素，占用内存的一个字节
+		- Buffer的大小一旦确定，则不能修改，Buffer实际上是对底层内存的直接操作
+		- Buffer的方法
+			- Buffer.from(字符串)
+				- 将一个字符串中内容保存到一个buffer中
+			- Buffer.alloc(size)
+				- 创建一个指定大小的buffer对象
+			- Buffer.allocUnsafe(size)
+				- 创建一个指定大小的buffer对象，可以包含敏感数据
+			- buf.toString()
+				- 将buffer转换为一个字符串
+				
+				
+	- fs模块
+		- 在Node通过fs模块来对系统中的文件进行操作，fs模块是node中已经继承好了，不需要在使用npm下载，直接引入即可
+		- 引入fs
+			var fs = require("fs");
+		- fs模块中的大部分操作都提供了两种方法，同步方法和异步方法
+			同步方法带sync
+			异步方法没有sync，需要回调函数callback
+			
+		- 写入文件
+			1.同步写入 fs.writeSync(fd, string[, position[, encoding]])
+			2.异步写入 fs.write(fd, string[, position[, encoding]], callback) 
+			3.简单写入 fs.readFile(path[, options], callback)
+				  fs.readFileSync(path[, options])
+			4.流式写入
+			
+		- 读取文件
+			1.同步读取 fs.readSync(fd, buffer, offset, length, position)
+			2.异步读取 fs.read(fd, buffer, offset, length, position, callback)
+			3.简单读取 fs.readFile(path[, options], callback)
+				  fs.readFileSync(path[, options])
+			4.流式读取
+			
+		- 方法
+			- 打开文件
+				fs.open(path, flags[, mode], callback) 
+				fs.openSync(path, flags[, mode])
+				
+			- 读写文件
+				fs.write(fd, string[, position[, encoding]], callback) 
+				fs.writeSync(fd, string[, position[, encoding]])
+				
+				fs.read(fd, buffer, offset, length, position, callback)
+				fs.readSync(fd, buffer, offset, length, position)
+				
+			- 关闭文件
+				fs.close(fd,callback)
+				fs.closeSync(fd);
+				
+			- 简单文件读取和写入
+				fs.writeFile(file, data[, options], callback)
+				fs.writeFileSync(file, data[, options])
+				
+				fs.readFile(path[, options], callback)
+				fs.readFileSync(path[, options])
+				
+				
+			- 流式文件读取和写入
+				- 流式读取和写入适用于一些比较大的文件
+					fs.createWriteStream(path[, options])
+					fs.createReadStream(path[, options])
+					
+				- 例子
+					// 第一种方式
+					//创建一个可读流
+					var rs = fs.createReadStream("C:/Users/lilichao/Desktop/笔记.mp3");
+					//创建一个可写流
+					var ws = fs.createWriteStream("b.mp3");
+					//pipe()可以将可读流中的内容，直接输出到可写流中
+					rs.pipe(ws);
+
+					// 第二种方式						
+					//创建一个可读流
+					var rs = fs.createReadStream("C:/Users/lilichao/Desktop/笔记.mp3");
+					//创建一个可写流
+					var ws = fs.createWriteStream("a.mp3");
+
+					//监听流的开启和关闭
+					rs.once("open",function () {
+						console.log("可读流打开了~~");
+					});
+
+					rs.once("close",function () {
+						console.log("可读流关闭了~~");
+						//数据读取完毕，关闭可写流
+
+						ws.end();
+					});
+
+					ws.once("open",function () {
+						console.log("可写流打开了~~");
+					});
+
+					ws.once("close",function () {
+						console.log("可写流关闭了~~");
+					});
+
+					//如果要读取一个可读流中的数据，必须要为可读流绑定一个data事件，data事件绑定完毕，它会自动开始读取数据
+					rs.on("data", function (data) {
+						//console.log(data);
+						//将读取到的数据写入到可写流中
+						ws.write(data);
+					});
+
+			
+			
+			
+			
+			
+			
+			
+			
+		
+		
+		

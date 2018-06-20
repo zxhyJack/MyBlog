@@ -959,14 +959,13 @@ tail使用”-f”选项，tail 命令继续监测这个文件，当新的内容
 
 #### 字符展开
 
-> echo this is a test
-
-> this is a test 
+    [mutou@mutou:~]$ echo this is a test
+    this is a test 
 
 #### 路径名展开
 
 > ls 
-
+>
 > echo D*
 
 控制台显示
@@ -976,28 +975,96 @@ tail使用”-f”选项，tail 命令继续监测这个文件，当新的内容
 隐藏文件路径名展开
 
 > echo * // 不显示隐藏文件
-
+>
 > echo .* // 显示隐藏文件，但是会把`.` `..`也显示出来
-
+>
 > echo .[!.]* //显示隐藏文件
-
+>
 > ls -A // 显示所有的文件清单，包括隐藏的和非隐藏的
 
 #### 波浪线展开
-> echo ~
-
-> /home/tiger
+    [mutou@mutou:~]$ echo ~
+    /home/tiger
 
 #### 算数表达式展开
-算数表达式的格式`$((expression))`
+算数表达式的格式 `$((expression))`
 
 使用echo展开
-> echo $((2+2))
 
-算数表达式只支持整数，支持嵌套
+    [mutou@mutou:~]$ echo $((2+2))
+    4
 
-> 
+算数表达式只支持整数，支持嵌套,例如5的平方乘以3
 
+    [mutou@mutou:~]$ echo $(((5**2)*3))
+    75
+
+#### 花括号的展开
+从一个包含花括号的模式中，创建出多个字符串
+
+    [mutou@mutou:~]$ echo Front-{A,B,C}-back
+    Front-A-back Front-B-back Front-C-back
+
+    [mutou@mutou:~]$ echo Number{1..3}
+    Number1 Number2 Number3
+
+#### 参数展开
+USER：是用户名
+
+printenv：有效的变量列表
+
+    [mutou@mutou:~]$ echo $USER
+    mutou
+
+    [mutou@mutou:~]$ printenv | less
+
+#### 命令替换
+
+命令替换允许我们把一个命令的输出作为一个展开模式来使用
+
+    [mutou@mutou:~]$ echo $(ls)
+    company doc download duoda MyBlog resource summary TLCL YQTJ
+
+#### 引用
+
+    [mutou@mutou:~]$ echo $100
+    00
+
+shell提供了一种叫做引用的机制，来有选择地禁止不需要的展开
+参数展开时把`$1`的值替换为一个空字符串，
+
+#### 双引号
+
+属于引用的类型，如果把文本放在双引号中，shell使用的特殊字符将失去他们的特殊含义u，被当作普通字符来看待，除了$，\\（反斜杠），\`（倒引号），这意味着单词分割、路径名展开、波浪线展开、和花括号展开都将失效，而参数展开、算数展开和命令替换仍然执行
+
+使用双引号，我们可以组织单词分割，得到期望的结果
+
+     [mutou@mutou:~]$ ls -l “two words.txt”
+
+参数展开、算数表达式展开和命令替换仍然有效
+     [mutou@mutou:~]$ echo "$USER $((2+2)) $(cal)"
+
+#### 单引号
+
+单引号可以禁止所有的展开，以下例子是无引用、双引号i，单引号的比较结果
+
+    [mutou@mutou:~]$ echo text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER
+    text /home/me/ls-output.txt a b foo 4 me
+    [mutou@mutou:~]$ echo "text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER"
+    text ~/*.txt   {a,b} foo 4 me
+    [mutou@mutou:~]$ echo 'text ~/*.txt {a,b} $(echo foo) $((2+2)) $USER'
+    text ~/*.txt  {a,b} $(echo foo) $((2+2)) $USER
+
+#### 转义字符
+
+如果只想引用单个字符，可以在字符之前加上一个反斜杠，在双引号中使用转义字符可以有选择地组织展开
+
+    [mutou@mutou:~]$ echo “The balance for user $USER id: \$5.00”
+    The balance for user me is: $5.00
+
+使用转义字符来消除文件名中一些字符的特殊含义是很普遍的，例如"$"，"!"，" "
+
+    [mutou@mutou:~]$ mv bad\&filename good_filename
 
 
 

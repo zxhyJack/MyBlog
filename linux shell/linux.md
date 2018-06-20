@@ -1,4 +1,3 @@
-# 
 ## 常用命令
   - date 显示系统当前的时间和日期
 
@@ -152,12 +151,12 @@
 
 ### 确定文件类型
 
-> file filename 
+    file filename 
 
 当调用 file 命令后，file 命令会打印出文件内容的简单描述
 
 ### 用`less`浏览文件内容
-> less filename
+    less filename
 
 - 一旦运行起来，less 程序允许你前后滚动文件
 - 按下“q”键， 退出 less 程序
@@ -350,7 +349,8 @@
 
 ### 符号链接
 也成为软链接或`symlink`
->lrwxrwxrwx 1 root root 11 2007-08-11 07:34 libc.so.6 -> libc-2.6.so
+
+    lrwxrwxrwx 1 root root 11 2007-08-11 07:34 libc.so.6 -> libc-2.6.so
 
 `l`代表该文件是链接,`libc.so.6 -> libc-2.6.so`代表`libc.so.6`是指向`libc-2.6.so`的链接，执行`libc.so.6`时，实际上执行的是`libc-2.6.so`
 
@@ -475,11 +475,11 @@
 ### cp - 复制文件和目录
 - 复制单个文件或目录”item1”到文件或目录”item2”
 
- > cp item1 item2
+        cp item1 item2
 
  - 复制多个项目（文件或目录）到一个目录下
 
- > cp item... directory
+        cp item... directory
 
  <table class="multi">
 <caption class="cap">表5-4: cp 选项</caption>
@@ -549,11 +549,12 @@ dir2 必须已经存在。</td>
 
 ### mv - 移动和重命名文件
 - 把文件或目录 “item1” 移动或重命名为 “item2”
-> mv item1 item2
+        
+        mv item1 item2
 
 - 把一个或多个条目从一个目录移动到另一个目录中
 
-> mv item... directory
+        mv item... directory
 
 <table class="multi">
 <caption class="cap">表5-6: mv 选项</caption>
@@ -601,7 +602,7 @@ dir2 必须已经存在。</td>
 </table>
 
 ### rm - 删除文件和目录
-> rm item...
+    rm item...
 
 `item` 代表一个或多个文件、目录
 
@@ -670,11 +671,11 @@ tips：当你使用带有通配符的rm命令时（除了仔细检查输入的�
 ### ln — 创建链接
 - 创建硬链接
 
-> ln file link
+        ln file link
 
 - 创建符号链接（软链接）
 
-> ln -s item link
+        ln -s item link
 
 ### 硬链接
 
@@ -712,26 +713,26 @@ tips：当你使用带有通配符的rm命令时（除了仔细检查输入的�
 ### 识别命令
 - type － 显示命令的类型，是shell内部命令
 
-> type command
+        type command
 
 - which － 显示一个可执行程序的位置，只对可执行程序有效，不包括内建命令和命令别名
 
-> which ls
+        which ls
 
 ### 得到命令文档
 - help － 得到 shell 内建命令的帮助文档
 
-> help cd
+        help cd
 
 - --help - 显示用法信息，显示命令所支持的语法和选项说明
 
 > mkdir --help
 
-> mkdir --h
+    mkdir --h
 
 - man － 显示程序手册页,一般地包含一个标题、命令语法的纲要、命令用途的说明、 以及每个命令选项的列表和说明
 
-> man ls
+        man ls
 
 - apropos － 显示适当的命令
 
@@ -745,7 +746,7 @@ tips：当你使用带有通配符的rm命令时（除了仔细检查输入的�
 
 info是GNU 项目提供了一个命令程序手册页的替代物
 
-> info coreutils
+    info coreutils
 
  <table class="multi">
 <caption class="cap">表 6-2: info 命令</caption>
@@ -796,10 +797,11 @@ info是GNU 项目提供了一个命令程序手册页的替代物
 在创建别名前，要先查明该别名是否已经存在
  `type 别名`
 
-> alias foo='cd /usr; ls; cd -'
+    alias foo='cd /usr; ls; cd -'
 
 删除别名
-> unalias foo
+
+    unalias foo
 
 ## 重定向
 - cat － 连接文件
@@ -822,49 +824,51 @@ info是GNU 项目提供了一个命令程序手册页的替代物
 I/O 重定向允许我们来重定义标准输出的地点。我们使用 `>` 重定向符后接文件名将标准输出重定向到除屏幕 以外的另一个文件。
 
 例如：把 ls 命令的运行结果输送到文件 ls-output.txt 中去， 由文件代替屏幕
-> ls -l /usr/bin > ls-output.txt
+
+    ls -l /usr/bin > ls-output.txt
 
 简单地使用重定向符`>`，没有命令在它之前，这会清空一个已存在文件的内容或是 创建一个新的空文件
 
-> `> ls-output.txt`
+    `> ls-output.txt`
 
 把重定向结果追加到文件内容后面，而不是从开头重写文件,可以使用 `>>` 操作符
 
-
-> ls -l /usr/bin >> ls-output.txt
+    ls -l /usr/bin >> ls-output.txt
 
 ### 标准错误重定向
 文件流的前 三个称作标准输入、输出和错误，shell 内部分别将其称为文件描述符0、1和2,例子：
-> ls -l /bin/usr 2> ls-error.txt
+    
+    ls -l /bin/usr 2> ls-error.txt
 
 文件描述符”2”，紧挨着放在重定向操作符之前，来执行重定向标准错误到文件 ls-error.txt 任务
 
 ### 重定向标准输出和错误到同一个文件
 捕捉一个命令的所有输出到一个文件
-- > ls -l /bin/usr > ls-output.txt 2>&1
+
+-   ls -l /bin/usr > ls-output.txt 2>&1
 
 使用这种方法，我们完成两个重定向。首先重定向标准输出到文件 ls-output.txt，然后 重定向文件描述符重定向标准错误到文件 ls-output.txt，重定向的顺序安排非常重要。标准错误的重定向必须总是出现在标准输出 重定向之后，要不然它不起作用。2>&1，表示2的输出重定向等同于1
 
-- > ls -l /bin/usr &> ls-output.txt
+-   ls -l /bin/usr &> ls-output.txt
 
 使用单单一个表示法 `&>` 来重定向标准输出和错误到文件 ls-output.txt
 
 ### 处理不需要的输出
 当不想要一个命令的输出结果，把它们扔掉时，可以通过重定向输出结果到`/dev/null`的文件，这个文件叫做位存储桶，使用于错误和状态信息
 
-> node dist >/dev/null 2>&1 &
+    node dist >/dev/null 2>&1 &
 
 `>/dev/null`将 node dist 的输出重定向到空设备文件，也就是不输出任何信息到终端，`2>&1`标准错误输出重定向（等同于）标准输出，，最后一个`&`，是让该命令在后台执行
 
 ### 标准输入重定向
 #### cat － 连接文件
 - 读取一个或多个文件，输出到标准输出
-
-> cat [file1] [file2]
+    
+    cat [file1] [file2]
 
 - 读取标准输入，输出到标准输出
 
-> cat 
+    cat 
 
 然后等待用户输入，输入完成后，`ctrl + D` 结束输入，然后复制刚才输入的内容到标准输出。
 
@@ -872,46 +876,48 @@ I/O 重定向允许我们来重定义标准输出的地点。我们使用 `>` �
 
 - 可以使用重定向把输入的内容输出到文件中
 
-> cat > input.txt
+        cat > input.txt
 
 ### 管道线
 可以将第一个命令的输出结果作为第二个命令的输入
 
-> command1 | command2
+    command1 | command2
 
 例子：
-> ls -l /usr/bin | less
+
+    ls -l /usr/bin | less
 
 方便查看有标准输出的命令的结果
 
 ### 过滤器
 - sort － 对列表进行排序,输出有序列表
 
-> ls -l /bin /usr/bin | sort | less
+    ls -l /bin /usr/bin | sort | less
 
 对两个有序列表进行合并,合并成新的有序列表
 
 - uniq － 去除重复行
 
-> ls -l /bin /usr/bin | sort | uniq | less
+
+    ls -l /bin /usr/bin | sort | uniq | less
 
 使用uniq把sort的结果删除重复行,如果想看到重复的数据列表,可以在uniq后带上`-d`,uniq一般与sort一起使用
 
-> ls -l /bin /usr/bin | sort | uniq -d | less
+    ls -l /bin /usr/bin | sort | uniq -d | less
 
-- wc － 打印行数、字数和字节数
+wc － 打印行数、字数和字节数
 
 显示文件所包含的行数,字数和字节数
 
-> wc input.txt
+    wc input.txt
 
 wc接受标准输入,类似cat
 
-> wc
+    wc
 
 wc可以用在管道线来统计数据,`-l`只显示行数
 
-> ls /bin /usr/bin | sort | uniq | wc -l
+    ls /bin /usr/bin | sort | uniq | wc -l
 
 - grep － 打印匹配行
 
@@ -928,28 +934,26 @@ grep有一些选项:`-i` 忽略大小写,`-v` 只显示不匹配的行
 head: 显示文件的前十行
 
 tail: 显示文件的后十行
-
-> head in.txt
-
-> tail in.txt
+    head in.txt
+    tail in.txt
 
 后面跟`-n`可以指定显示多少行
 
-> head -n 5 in.txt // 显示前五行
+    head -n 5 in.txt // 显示前五行
 
 可以用在管道中
 
-> ls -l /usr/bin | head -n 5
+    ls -l /usr/bin | head -n 5
 
 tail使用”-f”选项，tail 命令继续监测这个文件，当新的内容添加到文件后，它们会立即 出现在屏幕上。这会一直继续下去直到你输入 Ctrl-c
 
-> tail -f /var/log/messages
+    tail -f /var/log/messages
 
 - tee － 从 Stdin 读取数据，并同时输出到 Stdout 和文件
 
 从标准输入读取数据,同时复制到标准输出和一个或多个文件
 
-> ls -l /usr/bin | grep zip | tee in.txt
+    ls -l /usr/bin | grep zip | tee in.txt
 
 读取查询结果输出到in.txt中
 
@@ -964,9 +968,8 @@ tail使用”-f”选项，tail 命令继续监测这个文件，当新的内容
 
 #### 路径名展开
 
-> ls 
->
-> echo D*
+    ls 
+    echo D*
 
 控制台显示
 
@@ -974,13 +977,13 @@ tail使用”-f”选项，tail 命令继续监测这个文件，当新的内容
 
 隐藏文件路径名展开
 
-> echo * // 不显示隐藏文件
->
-> echo .* // 显示隐藏文件，但是会把`.` `..`也显示出来
->
-> echo .[!.]* //显示隐藏文件
->
-> ls -A // 显示所有的文件清单，包括隐藏的和非隐藏的
+    echo * // 不显示隐藏文件
+
+    echo .* // 显示隐藏文件，但是会把`.` `..`也显示出来
+
+    echo .[!.]* //显示隐藏文件
+
+    ls -A // 显示所有的文件清单，包括隐藏的和非隐藏的
 
 #### 波浪线展开
     [mutou@mutou:~]$ echo ~

@@ -31,3 +31,17 @@ sudo add-apt-repository ppa:git-core/ppa
 sudo apt update
 sudo apt install git
 
+# chrome
+#wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#sudo dpkg -i --force-depends google-chrome-stable_current_amd64.deb
+
+# ss-qt5
+sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5
+
+# terminator
+sudo apt-get install terminator
+
+
+

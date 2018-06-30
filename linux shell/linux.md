@@ -1059,7 +1059,7 @@ shell提供了一种叫做引用的机制，来有选择地禁止不需要的展
     text ~/*.txt  {a,b} $(echo foo) $((2+2)) $USER
 
 #### 转义字符
-
+  
 如果只想引用单个字符，可以在字符之前加上一个反斜杠，在双引号中使用转义字符可以有选择地组织展开
 
     [mutou@mutou:~]$ echo “The balance for user $USER id: \$5.00”

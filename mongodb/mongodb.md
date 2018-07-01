@@ -5,6 +5,7 @@ MongoDB
 - 属于NoSQL数据库，是介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的
 - 旨在为WEB应用提供可扩展的高性能数据存储解决方案
 - 数据结构： 键值对（key-value），类似JSON对象
+      
       {
         name：'Paul',
         age:21,
@@ -60,16 +61,16 @@ MongoDB
 
 - 查看所有数据库
 
-    show databases | dbs
+        show databases | dbs
 
 - 创建集合
 
-    db.createCollection(collection_name)
+        db.createCollection(collection_name)
 
 - 删除数据库
 先进入要删除的数据库，然后执行命令
 
-    db.dropDatabase()
+        db.dropDatabase()
 
 - 删除集合
 

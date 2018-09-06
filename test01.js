@@ -22,5 +22,6 @@ delete user.name
 
 console.log(user)
 
-let str = ' hello '
-console.log(str.trim()) //hello
+let str = ' he llo '
+
+console.log(str.replace(/(\s$)/g,''));

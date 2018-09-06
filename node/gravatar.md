@@ -14,13 +14,21 @@ Gravatar是一个全球通用的头像。你只需上传一次并创建自己的
 
 gravatar依赖邮箱生成的哈希值作为图片地址的一部分,所以需要把邮箱地址哈希化
 
+邮箱地址哈希化总共由三个步骤：
+
+- 邮箱地址首尾去空白
+
+- 所有字母转变成小写字母
+
+- 哈希化
+
 ### 代码实现
 
     const crypto = require('crypto');
 
     function gravatar(mail) {
       let size = 100
-      let hash = crypto.createHash('md5').update(mail).digest("hex").toLowerCase()
+      let hash = Crypto.createHash('md5').update(mail.trim().toLowerCase()).digest("hex")
       return `http://www.gravatar.com/avatar/${hash}?s=${size}&d=identicon`;
     }
 

@@ -21,3 +21,6 @@ let user = {
 delete user.name
 
 console.log(user)
+
+let str = ' hello '
+console.log(str.trim()) //hello

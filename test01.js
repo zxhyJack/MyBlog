@@ -25,4 +25,4 @@ console.log(user)
 let str = ' he llo '
 
 console.log(str.replace(/(\s$)/g,''));
-console.log(eval('[' + String(['1', '2', '3']) + ']') // [1,2,3])
+console.log(eval('[' + String(['1', '2', '3']) + ']')) // [1,2,3])

@@ -55,3 +55,8 @@ cname   | wmname |          avg
       FROM makerar
       GROUP BY cname) t
     LEFT JOIN makerar m ON t.cname = m.cname AND t.max = m.avg;
+
+
+参考链接
+
+https://stackoverflow.com/questions/19601948/must-appear-in-the-group-by-clause-or-be-used-in-an-aggregate-function#

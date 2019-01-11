@@ -248,13 +248,14 @@ var作用域 | 函数作用域：var 声明的变量可以在包含他们的函�
 
 - 默认参数 
 如果不对其赋值或对其赋值为`undefined`，使用默认值，如果对其赋值，则使用用户传值，带默认值的参数不必放在必须参数的后面
-> function buildName(firstName: string, lastName: 'Smith') {
-		> return firstName + '' + lastName;
-> }
-> let result1 = buildName("Bob");                  // works correctly now, returns "Bob Smith"
-> let result2 = buildName("Bob", undefined);       // still works, also returns "Bob Smith"
-> let result3 = buildName("Bob", "Adams", "Sr.");  // error, too many parameters
-> let result4 = buildName("Bob", "Adams");         // ah, just right
+
+		function buildName(firstName: string, lastName: 'Smith') {
+			return firstName + '' + lastName;
+		}
+		let result1 = buildName("Bob");                  // works correctly now, returns "Bob Smith"
+		let result2 = buildName("Bob", undefined);       // still works, also returns "Bob Smith"
+		let result3 = buildName("Bob", "Adams", "Sr.");  // error, too many parameters
+		let result4 = buildName("Bob", "Adams");         // ah, just right
 
 #### 剩余参数
 - 当你不知道参数的数量时，可以采用剩余参数

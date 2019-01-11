@@ -19,3 +19,12 @@ docker容器 <- 宿主机
 
     docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
 
+exp:
+
+把 mycontainer 容器中/root下的test.txt文件拷贝到本地的/home/tiger下
+
+    docker cp mycontainer:/root/test.txt /home/tiger
+
+把本地 /home/tiger 下的 hello.txt 拷贝到 mycontainer 容器的 /root 下
+
+    docker cp /home/tiger mycontainer:/root/

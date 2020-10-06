@@ -1,0 +1,4 @@
+- [python3 list comprehensions(列表解析)](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)
+- [连续函数微分与离散函数差分](https://blog.csdn.net/lz0499/article/details/71937737)
+- [差分方程是解决计算机问题的重要的工具，离散数学是数学和计算机之间的桥梁](https://www.zhihu.com/question/38040913/answer/74954244)，找到了[离散数学及其应用](https://pic2.zhimg.com/v2-ecb056b8f5c6c9f7c4297dc2c7fbd313_r.jpg?source=1940ef5c)这本书<br><img src="https://pic2.zhimg.com/v2-ecb056b8f5c6c9f7c4297dc2c7fbd313_r.jpg?source=1940ef5c" height="150" alt="图片名称" />
+- 

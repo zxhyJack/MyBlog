@@ -88,5 +88,8 @@
     - 交叉的作用：保证种群的稳定性，朝着最优解的方向进化；  
     - 变异的作用：保证种群的多样性，避免交叉可能产生的局部收敛。
     
-- [经典算法研究系列：七、深入浅出遗传算法](https://blog.csdn.net/v_JULY_v/article/details/6132775) July大神写的，深入浅出
+- [经典算法研究系列：七、深入浅出遗传算法](https://blog.csdn.net/v_JULY_v/article/details/6132775)  
+July大神写的，深入浅出
 - [遗传算法：基本原理及python实现](https://dothinking.github.io/blog/2018/10/21/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E5%8F%8APython%E5%AE%9E%E7%8E%B0.html)
+- [HELLO，遗传算法！](http://garfileo.is-programmer.com/2011/2/19/hello-ga.24563.html)  
+用python详细的描述了算法的实现过程

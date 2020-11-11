@@ -91,3 +91,11 @@ random_sample的别称
 >>> np.random.choice(5, 3)
 array([0, 3, 4]) # random
 ```
+- numpy.random.permutation(x)  
+对给定的序列随机排序
+```
+>>> np.random.permutation(10)
+array([1, 7, 4, 3, 0, 9, 2, 5, 8, 6]) # random
+>>> np.random.permutation([1, 4, 9, 12, 15])
+array([15,  1,  9,  4, 12]) # random
+```
